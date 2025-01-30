@@ -1,8 +1,8 @@
 import { dbConnect } from "@/lib/dbConnect";
 import Form from "@/models/form";
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     await dbConnect();
     const forms = await Form.find({});
@@ -10,5 +10,10 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ err: "No forms found" }, { status: 400 });
     }
     return NextResponse.json(forms, { status: 200 });
-  } catch (error) {}
+  } catch (error) {
+    return NextResponse.json(
+      { err: "Something went wrong", error },
+      { status: 500 }
+    );
+  }
 }

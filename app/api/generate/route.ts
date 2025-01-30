@@ -1,10 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { GoogleGenerativeAI } from "@google/generative-ai";
-import { PrismaClient } from "@prisma/client";
 import { dbConnect } from "@/lib/dbConnect";
 import Form from "@/models/form";
-
-const prisma = new PrismaClient();
 
 const getPrompt = (formType: string) => `
   You are an expert form builder. So your task is to create a form which will be requested by

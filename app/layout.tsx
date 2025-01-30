@@ -2,8 +2,6 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
-import { motion } from "framer-motion";
-import { clerkMiddleware, createRouteMatcher } from "@clerk/nextjs/server";
 import { ToastContainer } from "react-toastify";
 
 const geistSans = Geist({

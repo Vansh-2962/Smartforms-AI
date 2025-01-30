@@ -2,9 +2,8 @@
 import FormCard from "@/components/FormCard";
 import axios from "axios";
 import { ChevronLeft, Code, ShareIcon } from "lucide-react";
-import Link from "next/link";
 import { useParams, useRouter } from "next/navigation";
-import React, { cache, useEffect } from "react";
+import React, { useEffect } from "react";
 import { motion } from "framer-motion";
 import {
   Dialog,
@@ -26,7 +25,7 @@ const page = () => {
       console.log(res.data);
     }
     getForm();
-  }, []);
+  }, [formId]);
 
   const handleCopyEmbedCode = () => {
     const embedCode = `<iframe src="${window.location.origin}/form/${formId}" width="600" height="400" style="border: none;"></iframe>`;

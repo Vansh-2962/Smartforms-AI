@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 import axios from "axios";
 import Loader from "./Loader";
 import { useRouter } from "next/navigation";
-import { currentUser } from "@clerk/nextjs/server";
+
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
@@ -64,8 +64,9 @@ const Hero = () => {
           }}
           className="md:text-lg  mt-5 text-gray-600 font-medium"
         >
-          "Effortlessly create and manage intelligent, dynamic forms powered by
-          AI, designed to save time and deliver actionable results."
+          &quot;Effortlessly create and manage intelligent, dynamic forms
+          powered by AI, designed to save time and deliver actionable
+          results.&quot;
         </motion.p>
         <form
           onSubmit={handleFormGenerate}

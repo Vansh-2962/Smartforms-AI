@@ -2,14 +2,10 @@
 import React, { useState } from "react";
 import {
   Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogHeader,
-  DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Link from "next/link";
-import { currentUser } from "@clerk/nextjs/server";
+
 import { useUser } from "@clerk/nextjs";
 
 type Props = {
@@ -19,8 +15,6 @@ type Props = {
 };
 
 const PricingCard = ({ price }: { price: Props }) => {
-  const [plan, setPlan] = useState("");
-  const { user } = useUser();
 
   return (
     <div

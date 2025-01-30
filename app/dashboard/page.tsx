@@ -1,4 +1,4 @@
-import BgBlur from "@/components/BgBlur";
+
 import React from "react";
 
 const page = () => {

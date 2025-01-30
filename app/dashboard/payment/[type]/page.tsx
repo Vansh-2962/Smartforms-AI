@@ -18,7 +18,7 @@ import { useParams, useRouter } from "next/navigation";
 import { pricingDetails } from "@/lib/pricingDetails";
 import { motion } from "framer-motion";
 
-const paymentPage = () => {
+const PaymentPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
@@ -214,4 +214,4 @@ const paymentPage = () => {
   );
 };
 
-export default paymentPage;
+export default PaymentPage;

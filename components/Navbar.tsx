@@ -1,5 +1,4 @@
 "use client";
-import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Bebas_Neue } from "next/font/google";
 import { LogIn } from "lucide-react";

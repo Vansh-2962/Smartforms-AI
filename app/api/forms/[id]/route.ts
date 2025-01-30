@@ -1,6 +1,5 @@
 import { dbConnect } from "@/lib/dbConnect";
 import Form from "@/models/form";
-import mongoose from "mongoose";
 import { NextRequest, NextResponse } from "next/server";
 
 export async function GET(

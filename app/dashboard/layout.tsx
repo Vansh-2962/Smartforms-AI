@@ -3,9 +3,9 @@ import BgBlur from "@/components/BgBlur";
 import Link from "next/link";
 import { Bebas_Neue } from "next/font/google";
 import { ArrowLeftToLine, ArrowRightToLine, ClipboardType } from "lucide-react";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { SignedIn, SignIn, SignOutButton } from "@clerk/nextjs";
+import {  useState } from "react";
+
+import { SignedIn,  SignOutButton } from "@clerk/nextjs";
 
 const bebas_neue = Bebas_Neue({
   weight: "400",

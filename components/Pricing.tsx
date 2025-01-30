@@ -25,8 +25,8 @@ const Pricing = () => {
             transition={{ ease: "easeInOut", duration: 0.75, delay: 1 }}
             className="text-gray-600 font-medium text-lg mt-3"
           >
-            "Choose the plan that fits your needs and unlock the power of
-            SmartForms AI today."
+            &quot;Choose the plan that fits your needs and unlock the power of
+            SmartForms AI today.&quot;
           </motion.p>
         </motion.section>
 

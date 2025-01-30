@@ -3,13 +3,13 @@ import axios from "axios";
 import { Montserrat } from "next/font/google";
 import ReactStars from "react-stars";
 import { motion } from "framer-motion";
-import { CircleX, Cross } from "lucide-react";
+
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 const FormCard = ({
   formId,
-  setIsOpen,
+
 }: {
   formId: string | any;
   setIsOpen?: any;
@@ -22,7 +22,7 @@ const FormCard = ({
       setForm(res.data);
     }
     getForm();
-  }, []);
+  }, [formId]);
 
   const code = ``;
 
