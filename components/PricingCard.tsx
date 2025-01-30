@@ -1,12 +1,11 @@
 "use client";
-import React, { useState } from "react";
 import {
   Dialog,
   DialogTrigger,
 } from "@/components/ui/dialog";
 import Link from "next/link";
 
-import { useUser } from "@clerk/nextjs";
+
 
 type Props = {
   type: string;

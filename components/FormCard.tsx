@@ -4,16 +4,9 @@ import { Montserrat } from "next/font/google";
 import ReactStars from "react-stars";
 import { motion } from "framer-motion";
 
-
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-const FormCard = ({
-  formId,
-
-}: {
-  formId: string | any;
-  setIsOpen?: any;
-}) => {
+const FormCard = ({ formId }: { formId: string | any; setIsOpen?: any }) => {
   const [form, setForm] = useState<any>();
   useEffect(() => {
     async function getForm() {
@@ -23,8 +16,6 @@ const FormCard = ({
     }
     getForm();
   }, [formId]);
-
-  const code = ``;
 
   return (
     <>

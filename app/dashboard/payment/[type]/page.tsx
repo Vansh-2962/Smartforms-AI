@@ -18,11 +18,18 @@ import { useParams, useRouter } from "next/navigation";
 import { pricingDetails } from "@/lib/pricingDetails";
 import { motion } from "framer-motion";
 
+type response = {
+  orderCreationId?: string;
+  razorpay_payment_id?: string;
+  razorpay_order_id?: string;
+  razorpay_signature?: string;
+};
+
 const PaymentPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [amount, setAmount] = useState("");
-  const [currency, setCurrency] = useState("INR");
+  const [currency] = useState("INR");
   const [loading, setLoading] = useState(false);
   const { user } = useUser();
 
@@ -60,7 +67,7 @@ const PaymentPage = () => {
         name: "Payment",
         currency: currency,
         order_id: orderId,
-        handler: async (response: any) => {
+        handler: async (response: response) => {
           const data = {
             orderCreationId: orderId,
             razorpayPaymentId: response.razorpay_payment_id,

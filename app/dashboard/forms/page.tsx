@@ -3,8 +3,9 @@ import axios from "axios";
 import React, { useState } from "react";
 import { useEffect } from "react";
 import { motion } from "framer-motion";
+import { AxiosError } from "axios";
 import { PackageOpen, Trash } from "lucide-react";
-import FormCard from "@/components/FormCard";
+
 import { toast } from "react-toastify";
 import { Bebas_Neue } from "next/font/google";
 
@@ -15,11 +16,22 @@ const bebas_neue = Bebas_Neue({
   style: "normal",
   subsets: ["latin"],
 });
+type ApiErrorResponse = {
+  err: string;
+  error?: unknown;
+};
 
-const page = () => {
+type FormType = {
+  _id: string;
+  name: string;
+  createdAt: string;
+  formTitle: string;
+};
+
+const Forms = () => {
   const [loading, setLoading] = useState(false);
   const [forms, setForms] = useState([]);
-  const [formIdToOpen, setFormIdToOpen] = useState("");
+
   const [isDeleted, setIsDeleted] = useState(false);
 
   useEffect(() => {
@@ -59,12 +71,16 @@ const page = () => {
       const res = await axios.delete(`/api/forms/${formId}`);
       toast.success(res.data.msg);
       setIsDeleted(true);
-    } catch (error: any) {
-      toast.error(error.response.data.err);
+    } catch (error: unknown) {
+      if (axios.isAxiosError(error)) {
+        const apiError = error as AxiosError<ApiErrorResponse>;
+        toast.error(apiError.response?.data?.err || "Something went wrong");
+      } else {
+        toast.error("An unexpected error occurred");
+      }
     }
   }
 
- 
   return (
     <div className="relative z-20 w-full h-screen  md:p-10 p-8">
       <Link href={"/"} className={`${bebas_neue.className} md:hidden `}>
@@ -81,7 +97,7 @@ const page = () => {
         </div>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 gap-2  place-items-center">
-        {forms?.map((form: any, index: any) => (
+        {forms?.map((form: FormType, index: any) => (
           <motion.div
             whileDrag={{ scale: 1.1 }}
             drag
@@ -137,4 +153,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default Forms;

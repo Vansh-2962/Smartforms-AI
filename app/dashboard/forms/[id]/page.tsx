@@ -15,7 +15,7 @@ import {
 } from "@/components/ui/dialog";
 import { toast } from "react-toastify";
 
-const page = () => {
+const SingleForm = () => {
   const formId = useParams().id;
   const router = useRouter();
 
@@ -113,4 +113,4 @@ const page = () => {
   );
 };
 
-export default page;
+export default SingleForm;
