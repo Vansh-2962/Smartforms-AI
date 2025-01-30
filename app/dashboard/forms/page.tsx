@@ -97,7 +97,7 @@ const Forms = () => {
         </div>
       </div>
       <div className=" grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 md:gap-5 gap-2  place-items-center">
-        {forms?.map((form: FormType, index: any) => (
+        {forms?.map((form: FormType, index: number) => (
           <motion.div
             whileDrag={{ scale: 1.1 }}
             drag

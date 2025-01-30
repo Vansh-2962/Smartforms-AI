@@ -25,6 +25,43 @@ type response = {
   razorpay_signature?: string;
 };
 
+type PaymentFailedResponseType = {
+  error: {
+    description: string;
+  };
+};
+
+type optionsType = {
+  key: string;
+  amount: number;
+  name: string;
+  currency: string;
+  order_id: string;
+  handler: (response: response) => void;
+  prefill: {
+    name: string;
+    email: string;
+  };
+  theme: {
+    color: string;
+  };
+};
+
+interface RazorpayInstance {
+  open: () => void;
+  close: () => void;
+  on: (
+    event: string,
+    callback: (response: PaymentFailedResponseType) => void
+  ) => void;
+  destroy: () => void;
+}
+
+declare global {
+  interface Window {
+    Razorpay: new (options: optionsType) => RazorpayInstance;
+  }
+}
 const PaymentPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
@@ -61,8 +98,8 @@ const PaymentPage = () => {
     e.preventDefault();
     try {
       const orderId = await createOrder();
-      const options = {
-        key: process.env.RAZORPAY_KEY_ID,
+      const options: optionsType = {
+        key: process.env.RAZORPAY_KEY_ID as string,
         amount: parseFloat(amount) * 100,
         name: "Payment",
         currency: currency,
@@ -93,10 +130,13 @@ const PaymentPage = () => {
         },
       };
 
-      const paymentObject = new (window as any).Razorpay(options);
-      paymentObject.on("payment.failed", function (response: any) {
-        toast.error(response.error.description);
-      });
+      const paymentObject = new window.Razorpay(options);
+      paymentObject.on(
+        "payment.failed",
+        function (response: PaymentFailedResponseType) {
+          toast.error(response.error.description);
+        }
+      );
       paymentObject.open();
       setAmount("");
       setName("");
@@ -166,7 +206,7 @@ const PaymentPage = () => {
               <Input
                 type="text"
                 required
-                placeholder={user?.fullName!}
+                placeholder={user?.fullName as string}
                 value={name}
                 onChange={(e) => setName(e.target.value)}
                 className="bg-white/60"
@@ -179,7 +219,7 @@ const PaymentPage = () => {
               </Label>
               <Input
                 type="email"
-                placeholder={user?.emailAddresses[0].emailAddress!}
+                placeholder={user?.emailAddresses[0].emailAddress as string}
                 required
                 value={email}
                 className="bg-white/60"

@@ -16,7 +16,7 @@ import {
 import { toast } from "react-toastify";
 
 const SingleForm = () => {
-  const formId = useParams().id;
+  const formId = useParams().id as string;
   const router = useRouter();
 
   useEffect(() => {

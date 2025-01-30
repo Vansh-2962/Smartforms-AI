@@ -6,8 +6,36 @@ import { motion } from "framer-motion";
 
 const montserrat = Montserrat({ subsets: ["latin"] });
 
-const FormCard = ({ formId }: { formId: string | any; setIsOpen?: any }) => {
-  const [form, setForm] = useState<any>();
+type OptionType = {
+  value?: string;
+  label?: string;
+  optionType?: string;
+};
+
+type ContentType = {
+  inputType?: string;
+  label?: string;
+  placeholder?: string;
+  required?: boolean;
+  options?: OptionType[];
+  value?: string;
+};
+
+type FormType = {
+  formTitle?: string;
+  content?: ContentType[];
+  userId?: string;
+  _id?: string;
+};
+
+type SelectOptionType = {
+  value?: string;
+  label?: string;
+  text?: string;
+};
+
+const FormCard = ({ formId }: { formId: string }) => {
+  const [form, setForm] = useState<FormType>();
   useEffect(() => {
     async function getForm() {
       const res = await axios.get(`/api/forms/${formId}`);
@@ -25,7 +53,7 @@ const FormCard = ({ formId }: { formId: string | any; setIsOpen?: any }) => {
         transition={{ duration: 0.5, ease: "easeInOut" }}
         className={`${montserrat.className}   bg-white/60 backdrop-blur-xl relative z-20 p-8 mb-10 rounded-lg`}
       >
-        <div className="">
+        <div>
           <motion.h1
             initial={{ opacity: 0, y: -100 }}
             animate={{ opacity: 1, y: 0 }}
@@ -40,7 +68,7 @@ const FormCard = ({ formId }: { formId: string | any; setIsOpen?: any }) => {
             {form?.formTitle}
           </motion.h1>
           <div className="">
-            {form?.content?.map((item: any, index: number) => (
+            {form?.content?.map((item: ContentType, index: number) => (
               <motion.div
                 initial={{ opacity: 0, x: -100 }}
                 animate={{ opacity: 1, x: 0 }}
@@ -185,7 +213,7 @@ const FormCard = ({ formId }: { formId: string | any; setIsOpen?: any }) => {
                     <label className="font-semibold text-black/70">
                       {item?.label}
                     </label>
-                    {item?.options?.map((option: any, index: number) => (
+                    {item?.options?.map((option: OptionType, index: number) => (
                       <div
                         key={index}
                         className="flex  items-center gap-3 justify-start"
@@ -195,7 +223,7 @@ const FormCard = ({ formId }: { formId: string | any; setIsOpen?: any }) => {
                           name={item?.label}
                           value={option?.value}
                         />
-                        <label htmlFor={option}>{option?.label}</label>
+                        <label>{option?.label}</label>
                       </div>
                     ))}
                   </motion.div>
@@ -269,19 +297,22 @@ const FormCard = ({ formId }: { formId: string | any; setIsOpen?: any }) => {
                       </div>
                     )}
                     {item?.options &&
-                      item?.options?.map((option: any, index: number) => (
-                        <div
-                          key={index}
-                          className="flex items-center gap-3 justify-start"
-                        >
-                          <input
-                            type={item?.inputType}
-                            name={option?.label}
-                            value={option?.value}
-                          />
-                          <label htmlFor={option}>{option?.label}</label>
-                        </div>
-                      ))}
+                      item?.options?.map(
+                        (option: OptionType, index: number) => (
+                          <div
+                            key={index}
+                            className="flex items-center gap-3 justify-start"
+                          >
+                            <input
+                              type={item?.inputType}
+                              name={option?.label}
+                              value={option?.value}
+                            />
+
+                            <label>{option?.label}</label>
+                          </div>
+                        )
+                      )}
                   </motion.div>
                 )}
                 {/* select */}
@@ -301,11 +332,13 @@ const FormCard = ({ formId }: { formId: string | any; setIsOpen?: any }) => {
                       {item?.label}
                     </label>
                     <select className="border shadow-md bg-white/60 border-gray-300 rounded-md px-3 py-2">
-                      {item?.options?.map((option: any, index: number) => (
-                        <option key={index} value={option?.value}>
-                          {option?.label || option?.text}
-                        </option>
-                      ))}
+                      {item?.options?.map(
+                        (option: SelectOptionType, index: number) => (
+                          <option key={index} value={option?.value}>
+                            {option?.label || option?.text}
+                          </option>
+                        )
+                      )}
                     </select>
                   </motion.div>
                 )}
