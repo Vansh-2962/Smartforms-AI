@@ -9,7 +9,6 @@ import axios from "axios";
 import Loader from "./Loader";
 import { useRouter } from "next/navigation";
 
-
 const montserrat = Montserrat({ subsets: ["latin"] });
 
 const Hero = () => {
@@ -19,8 +18,16 @@ const Hero = () => {
 
   const router = useRouter();
 
+  const totalForms = localStorage.getItem("totalforms");
+
   async function handleFormGenerate(e: React.FormEvent) {
     e.preventDefault();
+    if (Number(totalForms) === 3) {
+      setValue("");
+      return toast.error(
+        "You can create only 3 forms in a free plan. Upgrade your plan"
+      );
+    }
     try {
       setLoading(true);
       const response = await axios.post("/api/generate", {

@@ -19,7 +19,7 @@ const Footer = () => {
     >
       <div className="container mx-auto px-4 flex flex-col md:flex-row justify-between items-center">
         {/* Company Info */}
-        <Link href={"/"} className="mb-4 md:mb-0">
+        <Link href={"/"} className="mb-8 md:mb-0 text-center ">
           <h1 className={` ${bebas_neue.className} text-xl font-bold`}>
             SmartForms <span className="text-cyan-600">AI</span>
           </h1>
