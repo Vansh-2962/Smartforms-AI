@@ -10,7 +10,6 @@ import { toast } from "react-toastify";
 import { Bebas_Neue } from "next/font/google";
 
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 
 const bebas_neue = Bebas_Neue({
   weight: "400",
