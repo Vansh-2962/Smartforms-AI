@@ -1,6 +1,6 @@
 "use client";
 import { Sparkles } from "lucide-react";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Montserrat } from "next/font/google";
 import { useUser } from "@clerk/nextjs";
@@ -14,11 +14,14 @@ const montserrat = Montserrat({ subsets: ["latin"] });
 const Hero = () => {
   const [value, setValue] = useState("");
   const [loading, setLoading] = useState(false);
+  const [totalForms, setTotalForms] = useState(0);
   const { user } = useUser();
 
   const router = useRouter();
-
-  const totalForms = localStorage.getItem("totalforms");
+  useEffect(() => {
+    const res = localStorage.getItem("totalforms");
+    setTotalForms(Number(res));
+  }, []);
 
   async function handleFormGenerate(e: React.FormEvent) {
     e.preventDefault();
